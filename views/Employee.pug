@@ -1,0 +1,26 @@
+extends layout
+
+block content
+  h1 Sumanth Yeruva
+
+  .container-fluid
+    .row
+      -
+        let results = [
+          { Employee_fname:'Sumanth', Employee_lname:'Yeruva',Employee_id:1 },
+          { Employee_fname:'Balu', Employee_lname:'Yeruva',Employee_id:2  },
+          { Employee_fname:'Suri', Employee_lname:'Yeruva',Employee_id:3  }
+        ]
+    each item in results
+        .col-sm-2
+            h3 Employee  
+            div(onclick=`buy(${index})`)
+            p #{item.Employee_fname}, #{item.Employee_lname},#{item.Employee_id}
+
+  a(href='http://localhost:3000/') Link to Index
+
+  script.
+     function buy(variable) {
+      alert(`You purchased item ${variable+1}`);
+     }
+
