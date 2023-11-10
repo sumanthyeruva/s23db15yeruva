@@ -13,9 +13,17 @@ exports.Employee_list = async function(req, res) {
     
   
 // for a specific Employee.
-exports.Employee_detail = function(req, res) {
-res.send('NOT IMPLEMENTED: Employee detail: ' + req.params.id);
-};
+exports.Employee_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await Employee.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
+    
 // Handle Employee create on POST.
 exports.Employee_create_post = async function(req, res) {
     console.log(req.body)
@@ -42,8 +50,24 @@ exports.Employee_delete = function(req, res) {
 res.send('NOT IMPLEMENTED: Employee delete DELETE ' + req.params.id);
 };
 // Handle Employee update form on PUT.
-exports.Employee_update_put = function(req, res) {
-res.send('NOT IMPLEMENTED: Employee update PUT' + req.params.id);
+exports.Employee_update_put = async function(req, res) {
+console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+try {
+let toUpdate = await Employee.findById( req.params.id)
+// Do updates of properties
+if(req.body.Employee_fname)
+toUpdate.Employee_fname = req.body.Employee_fname;
+if(req.body.Employee_lname) toUpdate.Employee_lname = req.body.Employee_lname;
+if(req.body.Employee_id) toUpdate.Employee_id = req.body.Employee_id;
+let result = await toUpdate.save();
+console.log("Sucess " + result)
+res.send(result)
+} catch (err) {
+res.status(500)
+res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+}
 };
 // VIEWS
 // Handle a show all view
