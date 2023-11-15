@@ -1,0 +1,20 @@
+extends layout
+block content
+ h1= title
+ - let Employeeid = toShow._id
+ - let Employee_type = toShow.Employee_fname
+ - let Employeecost = toShow.Employee_id
+ - let Employeesize = toShow.Employee_lname
+ div
+ div.row
+ div(class='EmployeeAttr mr-3') Employee ID is:
+ div #{Employeeid}
+ div.row
+ div(class='EmployeeAttr mr-3') Employee Fname is:
+ div #{Employee_type}
+ div.row
+ div(class='EmployeeAttr mr-3') Employee Lname is:
+ div #{Employeesize}
+ div.row
+ div(class='EmployeeAttr mr-3') Employee Id is:
+ div #{Employeecost}
