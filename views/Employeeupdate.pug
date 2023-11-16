@@ -1,0 +1,52 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to update
+  else
+    - let id = toShow._id
+    - let Employeefname = toShow.Employee_fname
+    - let Employeelname = toShow.Employee_lname
+    - let Employeeid = toShow.Employee_id
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{id}
+    - let actionid = "/resource/Employee/" + id
+    form(id='EmployeeForm', action= actionid, method="PUT")
+      div.form-group
+        label.EmployeeAttr(for='Employeefname') Employee FirstName
+        input#Employeefname(type='text', name='Employeefname', value= Employeefname )
+      div.form-group
+        label.EmployeeAttr(for='Employeelname') Employee LastName
+        input#Employeelname(type='text', name='Employeelname', value= Employeelname )
+      div.form-group
+        label.EmployeeAttr(for='Employeeid') Employee Id
+        input#Employeeid(type='number', name='Employeeid', value= Employeeid )
+      input(type="submit")
+      script.
+        document.forms.EmployeeForm.addEventListener('submit', async (event) => {
+          event.preventDefault();
+          try {
+            // TODO: Add loading spinner or other user feedback
+
+            const resp = await fetch(event.target.action, {
+              method: 'PUT',
+              body: new URLSearchParams(new FormData(event.target))
+            });
+
+            if (!resp.ok) {
+              throw new Error('Network response was not ok');
+            }
+
+            // Attempt to parse the response as JSON
+            const body = await resp.json();
+            alert("Update succeeded");
+            // TODO: Handle the response body as needed
+          } catch (error) {
+            // Handle non-JSON responses gracefully
+            alert("Update failed: " + error.message);
+
+            // TODO: Handle the error appropriately
+          }
+        });

@@ -1,0 +1,32 @@
+extends layout
+block content
+  h1= title
+  form(id='EmployeeForm', action="/resource/Employee", method="POST")
+    div.form-group
+      label.EmployeeAttr(for='Employee_fname') Employee_fname
+      input#Employee_fname(type='text', name='Employee_fname')
+    div.form-group
+      label.EmployeeAttr(for='Employee_lname') Employee_lname
+      input#Employee_lname(type='text', name='Employee_lname')
+    div.form-group
+      label.EmployeeAttr(for='Employee_id') Employee_id
+      input#Employee_id(type='number', name='Employee_id')
+    input(type="submit")
+
+    script.
+      document.forms['EmployeeForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show the user that the form is being submitted
+        fetch(event.target.action, {
+          method: 'POST',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Save succeeded");
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Save failed " + error);
+        });
+      });
