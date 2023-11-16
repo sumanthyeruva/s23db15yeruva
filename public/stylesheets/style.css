@@ -9,6 +9,15 @@ a {
 
 .EmployeeAttr {
   background-color: aquamarine;
-  width: 120px;
+  width: 500px;
   }
   
+  .order{
+    background-color: rgb(26, 208, 93);
+    width: 500px;
+  }
+  .headi{
+    background-color: chocolate;
+    font-family: cursive;
+    width: 500px;
+  }
