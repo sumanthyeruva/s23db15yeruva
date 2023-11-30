@@ -16,13 +16,13 @@ block content
     form(id='EmployeeForm', action= actionid, method="PUT")
       div.form-group
         label.EmployeeAttr(for='Employeefname') Employee FirstName
-        input#Employeefname(type='text', name='Employeefname', value= Employeefname )
+        input#Employeefname(type='text', name='Employee_fname', value= Employeefname )
       div.form-group
         label.EmployeeAttr(for='Employeelname') Employee LastName
-        input#Employeelname(type='text', name='Employeelname', value= Employeelname )
+        input#Employeelname(type='text', name='Employee_lname', value= Employeelname )
       div.form-group
         label.EmployeeAttr(for='Employeeid') Employee Id
-        input#Employeeid(type='number', name='Employeeid', value= Employeeid )
+        input#Employeeid(type='number', name='Employee_id', value= Employeeid )
       input(type="submit")
       script.
         document.forms.EmployeeForm.addEventListener('submit', async (event) => {

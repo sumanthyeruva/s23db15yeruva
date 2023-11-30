@@ -2,6 +2,9 @@ extends layout
 
 block content
   h1 Sumanth Yeruva
+  - let des = `dispatch(\"/Employee/create\")`
+  button.btn( class="btn-secondary m-1" onclick= des) Create
+
 
   .container-fluid
     .row
@@ -11,9 +14,13 @@ block content
         .col-sm-2
             h3 Employee 
             - let destination = `dispatch(\"/Employee/update?id=${item._id}\")` 
+            - let destination1 = `dispatch(\"/Employee/delete?id=${item._id}\")`
+            - let destination2 = `dispatch(\"/Employee/detail?id=${item._id}\")`
             div(onclick=`buy(${index})`)
             p #{item.Employee_fname}, #{item.Employee_lname},#{item.Employee_id}
             button.btn( class="btn-primary ml-1", onclick= destination) Update
+            button.btn( class="btn-danger ml-1", onclick= destination1) Delete
+            button.btn( class="btn-secondary ml-1", onclick= destination2) Detail
 
   a(href='http://localhost:3000/') Link to Index
 
